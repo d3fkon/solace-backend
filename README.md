@@ -38,6 +38,8 @@ This server is written in Nest JS and uses Swagger for documenting the API's
 
 OrbitDB helps in achieving decentralized data storage, which plays a critical role in the UX of the Solace Wallet
 
+Link to the protocol program - https://github.com/d3fkon/solace-wallet
+
 ---------------------------------
 
 The core team behind the Solace Wallet is juggles between this and a full time job. So we are actively looking for contributors to help take the Solace Wallet forward. If you are proficient in React Native, Rust (Anchorlang) for Solana or Nest JS / NodeJS, feel free to open an issue or contact us on Twitter [![Twitter URL](https://img.shields.io/twitter/url/https/twitter.com/ashwinxprasad.svg?style=social&label=Follow%20%40ashwinxprasad)](https://twitter.com/ashwinxprasad)
