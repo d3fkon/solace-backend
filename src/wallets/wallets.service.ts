@@ -10,6 +10,9 @@ const solaceIdl = JSON.parse(
   fs.readFileSync('src/common/idl/solace.json', 'utf-8'),
 );
 
+/**
+ *
+ **/
 @Injectable()
 export class WalletsService {
   program: Program<Solace>;

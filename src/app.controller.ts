@@ -6,7 +6,4 @@ import { ResponseInterceptor } from './common/interceptors/response.interceptor'
 @UseInterceptors(ResponseInterceptor)
 export class AppController {
   constructor(private readonly appService: AppService) {}
-
-  @Post('/create-wallet')
-  createWallet() {}
 }

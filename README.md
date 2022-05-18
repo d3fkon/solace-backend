@@ -1,73 +1,51 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo_text.svg" width="320" alt="Nest Logo" /></a>
-</p>
+# Solace Protocol Backend (Powered by OrbitDB)
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+The solace protocol backend acts a supplementary infrastructure to the Solace program. The client consuming the program also uses this backend to enable UX functionalities as follows
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+1. Airdrop Service for opening new wallets
+2. Name Service for identifying wallet addresses with usernames
+3. Guardian Service for storing guardian information identifiers off chain
 
-## Description
+## Let's dig a little deeper
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+### Airdrop Service
 
-## Installation
+A solace wallet owner, needs to have some amount of SOL in their wallet, before opening a Solace wallet. But we cannot expect this to be the case 10/10 times, as the TG we are going behind are new to crypto (NTC) users and they seldom have this experience in crypto.
 
-```bash
-$ npm install
-```
+Thus, the airdrop service helps bridge this gap to get these new users on to Solace. Work is still needed to make this airdrop service more protected to avoid exploits. We can follow ArgentHQ from EVM for some inspiration on this
 
-## Running the app
+### Name service
 
-```bash
-# development
-$ npm run start
+Every user on Solace is required to identify themselves with an unique user alias, which gets stored on IPFS (filecoin) via OrbitDB. We chose to use OrbitDB for it's Key Value store and the quick access to data it provides. 
 
-# watch mode
-$ npm run start:dev
+The Name Mapping of these users are stored on OrbitDB, as this will be used for "Wallet Recovery". We don't expect our users to keep their 256-bit public key, hence this decentralized way of storing their names. 
 
-# production mode
-$ npm run start:prod
-```
+In case of this server going down or being controlled by a centralized authority, the community can always fork the names on this service and start their own Server with a new client, thus adhering to the philosophy of decentralization
 
-## Test
+### Guardian Service
 
-```bash
-# unit tests
-$ npm run test
+Every user on Solace can choose their guardians. Guardians hold the power to accept or decline a particular wallet's recovery attempt. Hence, they play a key role in the Solace ecosystem.
 
-# e2e tests
-$ npm run test:e2e
+The guardians of every wallet are stored onchain in the PDA for each wallet, but to access this data at the time of recovery, we use IPFS (filecoin) via OrbitDB to reverse-map users and their guardians, so the user experience is smooth
 
-# test coverage
-$ npm run test:cov
-```
+The Program itself has enough checks and bounds to ensure bad guardian actors don't get to alter the recovery process, then ensuring security, but OrbitDB helps add a clean UX layer, which helps user ensure security in the Solace ecosystem
 
-## Support
+--------------------------------
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+## Technical Details
 
-## Stay in touch
+This server is written in Nest JS and uses Swagger for documenting the API's
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+OrbitDB helps in achieving decentralized data storage, which plays a critical role in the UX of the Solace Wallet
 
-## License
+---------------------------------
 
-Nest is [MIT licensed](LICENSE).
+The core team behind the Solace Wallet is juggles between this and a full time job. So we are actively looking for contributors to help take the Solace Wallet forward. If you are proficient in React Native, Rust (Anchorlang) for Solana or Nest JS / NodeJS, feel free to open an issue or contact us on Twitter [![Twitter URL](https://img.shields.io/twitter/url/https/twitter.com/ashwinxprasad.svg?style=social&label=Follow%20%40ashwinxprasad)](https://twitter.com/ashwinxprasad)
+
+Let's build the next wallet geared towards mass adoption on Solana
+
+
+
+
+
+
